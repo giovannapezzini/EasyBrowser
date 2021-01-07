@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         window!.rootViewController = navigationController
-        let mainView = ViewController(nibName: nil, bundle: nil)
+        let mainView = TableViewController(nibName: nil, bundle: nil)
         navigationController.viewControllers = [mainView]
         window?.makeKeyAndVisible()
     }
