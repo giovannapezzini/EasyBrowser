@@ -50,15 +50,34 @@ class ViewController: UIViewController, WKNavigationDelegate {
     func monitorPageLoads() {
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload))
+        let back = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
+        let forward = UIBarButtonItem(image: UIImage(systemName: "chevron.forward"), style: .plain, target: self, action: #selector(forwardButtonTapped))
         
+
         progressView = UIProgressView(progressViewStyle: .default)
         progressView.sizeToFit()
         
         let progressButton = UIBarButtonItem(customView: progressView)
         
-        toolbarItems = [progressButton, spacer, refresh]
+        toolbarItems = [back, forward, spacer, progressButton, spacer, refresh]
         navigationController?.isToolbarHidden = false
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
+    }
+    
+    @objc func backButtonTapped() {
+        if webView.canGoBack {
+            webView.goBack()
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    @objc func forwardButtonTapped() {
+        if webView.canGoForward {
+            webView.goForward()
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func openPage(action: UIAlertAction) {
