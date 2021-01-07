@@ -16,6 +16,7 @@ class TableViewController: UITableViewController {
 
         title = "List of Websites"        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Link")
+        tableView.tableFooterView = UIView()
     }
 
     // MARK: - Table view data source
